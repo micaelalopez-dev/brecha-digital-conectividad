@@ -135,7 +135,8 @@ button,select{touch-action:manipulation}
 .quote{display:flex;gap:22px;align-items:start;margin:55px 0 0;padding:34px 0 0;border-top:1px solid #d5dcd8}
 .quote .symbol{font-family:var(--serif);font-size:66px;color:#8aa7a9;line-height:.9}
 .quote p{font-family:var(--serif);font-size:clamp(21px,2.5vw,32px);line-height:1.35;color:#183642;max-width:1020px;margin:0}
-.pais-intro{padding:92px 0 8px;background:var(--paper)}
+.pais-lead{color:var(--muted);margin-bottom:0}
+.pais-sub-eyebrow{margin-top:52px}
 .data-section{background:#e8ece7;padding:100px 0}
 .data-section .section-title{max-width:800px}.data-header{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:30px}
 .data-header p{max-width:650px;color:#667880;font-size:15px;line-height:1.65}
@@ -175,7 +176,7 @@ button,select{touch-action:manipulation}
 @media(max-width:1060px){.hero .shell{gap:23px}.hero-art{height:490px}.context .shell,.methods .shell{gap:55px}.shell{padding:0 26px}.header-tag{display:none}.navlinks{gap:13px}}
 @media(max-width:850px){.hero{padding-top:60px}.hero .shell{grid-template-columns:1fr}.hero h1{max-width:900px}.hero-art{height:420px;max-width:500px;margin:0 auto;width:100%}.float-card{right:0;top:20px}.hero-tag{bottom:15px;left:16px}
 .context .shell,.methods .shell{grid-template-columns:1fr;gap:28px}.question-cards{grid-template-columns:1fr 1fr}.q-card:last-child{grid-column:span 2}.explorer-top{display:block}.explorer-top p{max-width:620px}.main,.lower{grid-template-columns:1fr}.rank{max-height:500px}.natrow{grid-template-columns:repeat(2,1fr)}.map-card .mapviz{height:600px}.data-header{display:block}}
-@media(max-width:600px){.shell{padding:0 19px}.topbar .shell{height:60px;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}.brand{font-size:13px;white-space:nowrap;flex:none}.brandsmall{display:none}.navlinks{gap:14px;flex:none}.navlinks a{font-size:11px;white-space:nowrap}.navlinks a:nth-child(3){display:none}.mark{width:26px;height:26px}.hero{padding-top:45px;padding-bottom:45px}.hero h1{font-size:clamp(49px,11.3vw,70px)}.hero .lead{font-size:15px}.hero-byline{margin-top:28px}.hero-art{height:370px}.hero-map{width:70%}.float-card{padding:14px;max-width:165px}.float-card .big{font-size:43px}.float-card .sub{font-size:10px}.hero-tag{left:0;bottom:0}.ticker .shell{justify-content:flex-start;gap:9px}.ticker i{display:none}.context,.question,.findings,.data-section,.methods,.downloads-section{padding:65px 0}.pais-intro{padding:50px 0 0}.section-title,.subhead{font-size:38px}.question-cards,.finding-grid,.method-grid,.downloads-grid{grid-template-columns:1fr}.q-card:last-child{grid-column:auto}.q-card{min-height:auto}.explorer{padding:64px 0}.dashboard{padding:13px}.card{padding:18px}.natrow{gap:8px}.stat{padding:13px}.stat .n{font-size:23px}.stat .l{font-size:10px}.main,.lower{gap:10px}.map-card .mapviz{height:470px}.rank{max-height:460px}.row{grid-template-columns:22px minmax(75px,1fr) minmax(100px,43%);gap:5px;padding:7px 5px}.rname{font-size:11px}.rval{font-size:10px}.finding{min-height:0}.quote{gap:10px}.quote .symbol{font-size:46px}.quote p{font-size:23px}.table-tools{align-items:stretch}.download{justify-content:center}.site-footer .shell{display:block}.site-footer .source{margin-top:26px}}
+@media(max-width:600px){.shell{padding:0 19px}.topbar .shell{height:60px;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch}.brand{font-size:13px;white-space:nowrap;flex:none}.brandsmall{display:none}.navlinks{gap:14px;flex:none}.navlinks a{font-size:11px;white-space:nowrap}.navlinks a:nth-child(3){display:none}.mark{width:26px;height:26px}.hero{padding-top:45px;padding-bottom:45px}.hero h1{font-size:clamp(49px,11.3vw,70px)}.hero .lead{font-size:15px}.hero-byline{margin-top:28px}.hero-art{height:370px}.hero-map{width:70%}.float-card{padding:14px;max-width:165px}.float-card .big{font-size:43px}.float-card .sub{font-size:10px}.hero-tag{left:0;bottom:0}.ticker .shell{justify-content:flex-start;gap:9px}.ticker i{display:none}.context,.question,.findings,.data-section,.methods,.downloads-section{padding:65px 0}.section-title,.subhead{font-size:38px}.question-cards,.finding-grid,.method-grid,.downloads-grid{grid-template-columns:1fr}.q-card:last-child{grid-column:auto}.q-card{min-height:auto}.explorer{padding:64px 0}.dashboard{padding:13px}.card{padding:18px}.natrow{gap:8px}.stat{padding:13px}.stat .n{font-size:23px}.stat .l{font-size:10px}.main,.lower{gap:10px}.map-card .mapviz{height:470px}.rank{max-height:460px}.row{grid-template-columns:22px minmax(75px,1fr) minmax(100px,43%);gap:5px;padding:7px 5px}.rname{font-size:11px}.rval{font-size:10px}.finding{min-height:0}.quote{gap:10px}.quote .symbol{font-size:46px}.quote p{font-size:23px}.table-tools{align-items:stretch}.download{justify-content:center}.site-footer .shell{display:block}.site-footer .source{margin-top:26px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
@@ -239,14 +240,12 @@ button,select{touch-action:manipulation}
   </div>
   <div class="quote"><span class="symbol" aria-hidden="true">“</span><p>En Jujuy la brecha no es solo entre quienes tienen conexión y quienes no. También es entre quienes se conectan por fibra y quienes dependen de un enlace satelital en la Puna.</p></div>
 </div></section>
-<section class="pais-intro" id="pais"><div class="shell">
+<section class="explorer" id="pais"><div class="shell">
   <div class="eyebrow">05 / Segundo nivel</div>
   <h2 class="section-title">Ampliar la mirada al país.</h2>
-  <p class="intro-p">Jujuy es una de las 24 jurisdicciones de Argentina. Esta sección compara el panorama provincial del país completo con los mismos tres indicadores, y se irá completando en los próximos días.</p>
-</div></section>
-<section class="explorer" id="explorador"><div class="shell">
-  <div class="eyebrow">Explorador nacional</div>
-  <div class="explorer-top"><h2 class="subhead">Explorá el país<br>desde los datos.</h2><p>Elegí un indicador y seleccioná una provincia en el mapa o el ranking. Los gráficos y el detalle se actualizan automáticamente.</p></div>
+  <p class="intro-p pais-lead">Jujuy es una de las 24 jurisdicciones de Argentina. Esta sección compara el panorama provincial del país completo con los mismos tres indicadores, y se irá completando en los próximos días.</p>
+  <div class="eyebrow pais-sub-eyebrow">Explorador nacional</div>
+  <div class="explorer-top" id="explorador"><h2 class="subhead">Explorá el país<br>desde los datos.</h2><p>Elegí un indicador y seleccioná una provincia en el mapa o el ranking. Los gráficos y el detalle se actualizan automáticamente.</p></div>
   <div class="dashboard">
     <div class="board-label"><span>Panel federal / 2.º trimestre 2026</span><span>Fuente: ENACOM · Datos abiertos</span></div>
     <div class="controls"><span class="lbl">Indicador</span><div class="seg" id="seg" role="group" aria-label="Elegir indicador"><button type="button" data-m="pen" aria-pressed="true">Penetración</button><button type="button" data-m="fibra" aria-pressed="false">Fibra óptica</button><button type="button" data-m="vel" aria-pressed="false">Velocidad</button></div></div>
