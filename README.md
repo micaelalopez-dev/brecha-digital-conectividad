@@ -35,8 +35,15 @@ web/
 ├─ geo_nac.json      Mapa de provincias (simplificado) → reemplaza __GEO__
 ├─ jujuy_deptos.json Datos de Jujuy por departamento (16)  [AÚN NO USADO EN EL HTML]
 ├─ jujuy_geo.json    Mapa de departamentos de Jujuy (16)    [AÚN NO USADO EN EL HTML]
+├─ conclusiones.md   Texto ampliado de conclusiones (copy para la web) [NUEVO]
 ├─ build.py          Inyecta los JSON en el template → site.html
 ├─ site.html         Build actual (versión nacional)
+├─ datos/            CSV descargables + diccionario [NUEVO]
+│  ├─ penetracion_provincias_2026.csv
+│  ├─ serie_penetracion_2014_2026.csv
+│  ├─ jujuy_departamentos_2026.csv
+│  ├─ jujuy_regiones_2026.csv
+│  └─ diccionario_datos.md
 └─ README.md
 ```
 
@@ -117,9 +124,24 @@ Estructura objetivo (de arriba hacia abajo):
 - `fibra` siempre como **% del total de accesos** (no confundir con la columna
   "Fibra c/100 hog." del xlsx original; acá ya está convertida a %).
 
+## Descargas de datasets (NUEVO)
+Agregar una sección donde la gente pueda **descargar los datasets**. Los archivos
+ya están en `datos/` (ver `datos/diccionario_datos.md` para el esquema). Basta con
+enlaces de descarga (`<a href="datos/archivo.csv" download>`), idealmente con una
+línea por archivo que diga qué contiene y cuántas filas. No hace falta generar nada:
+los CSV son estáticos y se sirven tal cual.
+
+## Conclusiones ampliadas (NUEVO — marcado como clave)
+El texto completo está en `conclusiones.md`, con 6 bloques encabezados y ya apoyado
+en cifras reales. Reemplaza/expande la sección "Hallazgos" actual (hoy son 4 tarjetas
+sueltas). Mantener el tono editorial y los números tal cual; es contenido revisado,
+no reescribir las cifras.
+
 ### TODO
 - [ ] Cablear el explorador departamental de Jujuy (markup + JS sobre los JSON ya listos).
 - [ ] Reordenar la narrativa a Jujuy-primero / país-segundo.
+- [ ] Sumar sección de **descargas** enlazando los CSV de `datos/`.
+- [ ] Expandir la sección de **conclusiones** con el texto de `conclusiones.md`.
 - [ ] `git init`, primer commit, deploy a GitHub Pages.
 - [ ] (Opcional) sumar más provincias con desagregación si se consiguen los datos.
 
