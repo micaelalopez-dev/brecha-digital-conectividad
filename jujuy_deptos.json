@@ -1,0 +1,215 @@
+{
+ "departamentos": {
+  "Susques": {
+   "pen": 114.6,
+   "fibra": 47.3,
+   "vel": 146.1,
+   "accesos": 1308,
+   "hogares": 1141,
+   "region": "Puna",
+   "codigo": "38084",
+   "satelital": 36.3
+  },
+  "Dr. Manuel Belgrano": {
+   "pen": 104.9,
+   "fibra": 46.0,
+   "vel": 111.3,
+   "accesos": 104908,
+   "hogares": 100036,
+   "region": "Valles",
+   "codigo": "38021",
+   "satelital": 2.0
+  },
+  "Cochinoca": {
+   "pen": 100.3,
+   "fibra": 90.9,
+   "vel": 139.8,
+   "accesos": 4863,
+   "hogares": 4850,
+   "region": "Puna",
+   "codigo": "38007",
+   "satelital": 7.8
+  },
+  "San Pedro": {
+   "pen": 54,
+   "fibra": 87.0,
+   "vel": 107.1,
+   "accesos": 14472,
+   "hogares": 26794,
+   "region": "Ramal",
+   "codigo": "38063",
+   "satelital": 4.7
+  },
+  "Tumbaya": {
+   "pen": 51.1,
+   "fibra": 0.0,
+   "vel": 89.8,
+   "accesos": 886,
+   "hogares": 1733,
+   "region": "Quebrada",
+   "codigo": "38098",
+   "satelital": 37.1
+  },
+  "Palpalá": {
+   "pen": 49.4,
+   "fibra": 60.9,
+   "vel": 57.1,
+   "accesos": 9527,
+   "hogares": 19284,
+   "region": "Valles",
+   "codigo": "38042",
+   "satelital": 3.3
+  },
+  "Rinconada": {
+   "pen": 44.7,
+   "fibra": 4.8,
+   "vel": 210.9,
+   "accesos": 314,
+   "hogares": 703,
+   "region": "Puna",
+   "codigo": "38049",
+   "satelital": 95.2
+  },
+  "Ledesma": {
+   "pen": 40.7,
+   "fibra": 17.6,
+   "vel": 36.5,
+   "accesos": 11326,
+   "hogares": 27854,
+   "region": "Ramal",
+   "codigo": "38035",
+   "satelital": 4.2
+  },
+  "Tilcara": {
+   "pen": 25.6,
+   "fibra": 1.6,
+   "vel": 131,
+   "accesos": 1269,
+   "hogares": 4960,
+   "region": "Quebrada",
+   "codigo": "38094",
+   "satelital": 62.6
+  },
+  "Santa Bárbara": {
+   "pen": 23.6,
+   "fibra": 17.6,
+   "vel": 121.5,
+   "accesos": 1431,
+   "hogares": 6066,
+   "region": "Ramal",
+   "codigo": "38070",
+   "satelital": 44.9
+  },
+  "El Carmen": {
+   "pen": 20.8,
+   "fibra": 43.2,
+   "vel": 45.2,
+   "accesos": 7047,
+   "hogares": 33904,
+   "region": "Valles",
+   "codigo": "38014",
+   "satelital": 13.4
+  },
+  "Humahuaca": {
+   "pen": 20.6,
+   "fibra": 1.1,
+   "vel": 140.8,
+   "accesos": 1347,
+   "hogares": 6528,
+   "region": "Quebrada",
+   "codigo": "38028",
+   "satelital": 58.6
+  },
+  "Yavi": {
+   "pen": 20.2,
+   "fibra": 6.2,
+   "vel": 120.9,
+   "accesos": 1607,
+   "hogares": 7936,
+   "region": "Puna",
+   "codigo": "38112",
+   "satelital": 52.3
+  },
+  "San Antonio": {
+   "pen": 18.9,
+   "fibra": 0.0,
+   "vel": 129.1,
+   "accesos": 399,
+   "hogares": 2110,
+   "region": "Valles",
+   "codigo": "38056",
+   "satelital": 53.9
+  },
+  "Valle Grande": {
+   "pen": 17.7,
+   "fibra": 0.0,
+   "vel": 223.8,
+   "accesos": 165,
+   "hogares": 931,
+   "region": "Ramal",
+   "codigo": "38105",
+   "satelital": 100.0
+  },
+  "Santa Catalina": {
+   "pen": 16.3,
+   "fibra": 24.5,
+   "vel": 168.2,
+   "accesos": 143,
+   "hogares": 876,
+   "region": "Puna",
+   "codigo": "38077",
+   "satelital": 75.5
+  }
+ },
+ "provincial": {
+  "pen": 66.4,
+  "fibra": 47.8,
+  "vel": 101.7,
+  "ranking_nac": "16/24"
+ },
+ "serie_jujuy": [
+  18.7,
+  20.3,
+  21.9,
+  22.4,
+  23.4,
+  44.5,
+  47.9,
+  56.2,
+  46.9,
+  48.7,
+  49.5,
+  55.2,
+  66.4
+ ],
+ "serie_pais": [
+  49.9,
+  51.8,
+  53.3,
+  54.9,
+  59.2,
+  64.5,
+  64.2,
+  69.2,
+  68.8,
+  70.1,
+  71.9,
+  76.1,
+  85.4
+ ],
+ "serie_years": [
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025,
+  2026
+ ]
+}
