@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0b2432">
-<meta name="description" content="Un recorrido interactivo por las diferencias en el acceso, la calidad y la velocidad de internet fijo en las 24 jurisdicciones argentinas.">
-<title>La brecha digital en Argentina | Especial interactivo</title>
+<meta name="description" content="Un recorrido interactivo por la brecha digital en Jujuy, departamento por departamento, y su comparación con las 24 jurisdicciones de Argentina.">
+<title>La brecha digital en Jujuy y Argentina | Especial interactivo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -26,6 +26,7 @@ button,select{touch-action:manipulation}
 .eyebrow{display:flex;align-items:center;gap:9px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.11em;font-size:11px;font-weight:600}
 .eyebrow:before{content:'';height:7px;width:7px;background:var(--salmon);border-radius:50%}
 .section-title{font-family:var(--serif);font-size:clamp(35px,4.1vw,58px);font-weight:500;line-height:1.06;letter-spacing:-.045em;margin:15px 0 16px}
+.subhead{font-family:var(--serif);font-size:clamp(26px,3vw,38px);font-weight:500;line-height:1.1;letter-spacing:-.035em;margin:15px 0 16px;max-width:700px}
 .intro-p{font-size:16px;line-height:1.75;max-width:730px}
 .topbar{position:absolute;z-index:10;top:0;left:0;right:0;border-bottom:1px solid #ffffff2b}
 .topbar .shell{height:80px;display:flex;align-items:center;justify-content:space-between;gap:25px}
@@ -59,6 +60,7 @@ button,select{touch-action:manipulation}
 .float-card .change{padding-top:12px;margin-top:15px;border-top:1px solid #deded8;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;color:#296f70}
 .hero-tag{position:absolute;z-index:2;background:#0a2332ee;border:1px solid #6da9af99;padding:12px 14px;border-radius:9px;bottom:48px;left:0;box-shadow:0 8px 20px #09253399;font-family:var(--mono);font-size:10px;color:#d6e7e6;display:flex;align-items:center;gap:8px}
 .hero-tag:before{content:'';background:var(--gold);height:9px;width:9px;border-radius:100%}
+.hero-tag:hover{border-color:var(--mint)}
 .ticker{background:#e9e6dc;border-bottom:1px solid #d9d7cb;padding:19px 0}
 .ticker .shell{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .ticker span{font-family:var(--mono);font-size:11px;color:#51666b}.ticker strong{font-size:13px;color:#17313d;font-weight:600}.ticker i{color:#9eacae;font-style:normal}
@@ -93,10 +95,10 @@ button,select{touch-action:manipulation}
 .main{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:18px;align-items:start}
 .card{padding:25px;background:#102f3e;border:1px solid #2b4a57;border-radius:12px;min-width:0}
 .card h3{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#98b3bd;margin:0 0 17px;font-weight:500}
-.map-card{position:relative}.map-card:before{content:'ARGENTINA · 24 JURISDICCIONES';font-family:var(--mono);font-size:10px;color:#72919c;position:absolute;right:19px;bottom:90px}
-#map{width:100%;height:585px;display:block;touch-action:pan-y}
-#map path{stroke:#102633;stroke-width:1;cursor:pointer;transition:fill .2s,stroke .18s;vector-effect:non-scaling-stroke}
-#map path:hover{stroke:#fff;stroke-width:2.3}#map path.sel{stroke:var(--gold);stroke-width:2.6;filter:drop-shadow(0 0 4px #ffd187)}
+.map-card{position:relative}.map-card:before{content:attr(data-tag);font-family:var(--mono);font-size:10px;color:#72919c;position:absolute;right:19px;bottom:90px}
+.mapviz{width:100%;height:585px;display:block;touch-action:pan-y}
+.mapviz path{stroke:#102633;stroke-width:1;cursor:pointer;transition:fill .2s,stroke .18s;vector-effect:non-scaling-stroke}
+.mapviz path:hover{stroke:#fff;stroke-width:2.3}.mapviz path.sel{stroke:var(--gold);stroke-width:2.6;filter:drop-shadow(0 0 4px #ffd187)}
 .legend{margin-top:12px}.legbar{height:9px;border-radius:6px;background:linear-gradient(90deg,var(--c0),var(--c1),var(--c2))}
 .legends{display:flex;justify-content:space-between;margin-top:6px;font-family:var(--mono);font-size:11px;color:#9db6c0}
 .legcap{color:#829fa8;font-size:11px;margin-top:8px}
@@ -106,6 +108,7 @@ button,select{touch-action:manipulation}
 .rpos{font-family:var(--mono);font-size:10px;color:#6f929f}.rname{font-size:12px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}.rbarwrap{display:flex;align-items:center;gap:7px;width:100%}
 .rbar{height:7px;border-radius:3px;display:block;min-width:5px}.rval{font-family:var(--mono);font-size:10px;min-width:40px;text-align:right;margin-left:auto}
 .lower{display:grid;grid-template-columns:minmax(0,.83fr) minmax(0,1.17fr);gap:18px;margin-top:18px}
+.detail-standalone{margin-top:18px}
 .province-detail .dname{font-family:var(--serif);font-size:33px;letter-spacing:-.04em;line-height:1.15;color:#fff6eb}.province-detail .dreg{font-family:var(--mono);font-size:11px;color:#c2d1cb;margin-top:7px}
 .metrics{display:flex;flex-direction:column;gap:0;margin-top:20px}
 .metric{display:flex;justify-content:space-between;align-items:baseline;gap:14px;border-top:1px solid #385463;padding:14px 0}
@@ -127,6 +130,7 @@ button,select{touch-action:manipulation}
 .quote{display:flex;gap:22px;align-items:start;margin:55px 0 0;padding:34px 0 0;border-top:1px solid #d5dcd8}
 .quote .symbol{font-family:var(--serif);font-size:66px;color:#8aa7a9;line-height:.9}
 .quote p{font-family:var(--serif);font-size:clamp(21px,2.5vw,32px);line-height:1.35;color:#183642;max-width:1020px;margin:0}
+.pais-intro{padding:92px 0 8px;background:var(--paper)}
 .data-section{background:#e8ece7;padding:100px 0}
 .data-section .section-title{max-width:800px}.data-header{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:30px}
 .data-header p{max-width:650px;color:#667880;font-size:15px;line-height:1.65}
@@ -156,286 +160,369 @@ button,select{touch-action:manipulation}
 .site-footer .source{max-width:420px}
 @media(max-width:1060px){.hero .shell{gap:23px}.hero-art{height:490px}.context .shell,.methods .shell{gap:55px}.shell{padding:0 26px}.header-tag{display:none}.navlinks{gap:13px}}
 @media(max-width:850px){.hero{padding-top:140px}.hero .shell{grid-template-columns:1fr}.hero h1{max-width:900px}.hero-art{height:420px;max-width:500px;margin:0 auto;width:100%}.float-card{right:0;top:20px}.hero-tag{bottom:15px;left:16px}
-.context .shell,.methods .shell{grid-template-columns:1fr;gap:28px}.question-cards{grid-template-columns:1fr 1fr}.q-card:last-child{grid-column:span 2}.explorer-top{display:block}.explorer-top p{max-width:620px}.main,.lower{grid-template-columns:1fr}.rank{max-height:500px}.natrow{grid-template-columns:repeat(2,1fr)}.map-card #map{height:600px}.data-header{display:block}}
-@media(max-width:600px){.shell{padding:0 19px}.topbar .shell{height:70px}.brand{font-size:14px}.navlinks{gap:9px}.navlinks a{font-size:10px}.navlinks a:nth-child(3){display:none}.mark{width:30px;height:30px}.hero{padding-top:120px;padding-bottom:45px}.hero h1{font-size:clamp(49px,11.3vw,70px)}.hero .lead{font-size:15px}.hero-byline{margin-top:28px}.hero-art{height:370px}.hero-map{width:70%}.float-card{padding:14px;max-width:165px}.float-card .big{font-size:43px}.float-card .sub{font-size:10px}.hero-tag{left:0;bottom:0}.ticker .shell{justify-content:flex-start;gap:9px}.ticker i{display:none}.context,.question,.findings,.data-section,.methods{padding:65px 0}.section-title{font-size:38px}.question-cards,.finding-grid,.method-grid{grid-template-columns:1fr}.q-card:last-child{grid-column:auto}.q-card{min-height:auto}.explorer{padding:64px 0}.dashboard{padding:13px}.card{padding:18px}.natrow{gap:8px}.stat{padding:13px}.stat .n{font-size:23px}.stat .l{font-size:10px}.main,.lower{gap:10px}.map-card #map{height:470px}.rank{max-height:460px}.row{grid-template-columns:22px minmax(75px,1fr) minmax(100px,43%);gap:5px;padding:7px 5px}.rname{font-size:11px}.rval{font-size:10px}.finding{min-height:0}.quote{gap:10px}.quote .symbol{font-size:46px}.quote p{font-size:23px}.table-tools{align-items:stretch}.download{justify-content:center}.site-footer .shell{display:block}.site-footer .source{margin-top:26px}}
+.context .shell,.methods .shell{grid-template-columns:1fr;gap:28px}.question-cards{grid-template-columns:1fr 1fr}.q-card:last-child{grid-column:span 2}.explorer-top{display:block}.explorer-top p{max-width:620px}.main,.lower{grid-template-columns:1fr}.rank{max-height:500px}.natrow{grid-template-columns:repeat(2,1fr)}.map-card .mapviz{height:600px}.data-header{display:block}}
+@media(max-width:600px){.shell{padding:0 19px}.topbar .shell{height:70px}.brand{font-size:14px}.navlinks{gap:9px}.navlinks a{font-size:10px}.navlinks a:nth-child(3){display:none}.mark{width:30px;height:30px}.hero{padding-top:120px;padding-bottom:45px}.hero h1{font-size:clamp(49px,11.3vw,70px)}.hero .lead{font-size:15px}.hero-byline{margin-top:28px}.hero-art{height:370px}.hero-map{width:70%}.float-card{padding:14px;max-width:165px}.float-card .big{font-size:43px}.float-card .sub{font-size:10px}.hero-tag{left:0;bottom:0}.ticker .shell{justify-content:flex-start;gap:9px}.ticker i{display:none}.context,.question,.findings,.data-section,.methods{padding:65px 0}.pais-intro{padding:50px 0 0}.section-title,.subhead{font-size:38px}.question-cards,.finding-grid,.method-grid{grid-template-columns:1fr}.q-card:last-child{grid-column:auto}.q-card{min-height:auto}.explorer{padding:64px 0}.dashboard{padding:13px}.card{padding:18px}.natrow{gap:8px}.stat{padding:13px}.stat .n{font-size:23px}.stat .l{font-size:10px}.main,.lower{gap:10px}.map-card .mapviz{height:470px}.rank{max-height:460px}.row{grid-template-columns:22px minmax(75px,1fr) minmax(100px,43%);gap:5px;padding:7px 5px}.rname{font-size:11px}.rval{font-size:10px}.finding{min-height:0}.quote{gap:10px}.quote .symbol{font-size:46px}.quote p{font-size:23px}.table-tools{align-items:stretch}.download{justify-content:center}.site-footer .shell{display:block}.site-footer .source{margin-top:26px}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
 <body>
 <nav class="topbar" aria-label="Navegación principal"><div class="shell">
-  <a class="brand" href="#inicio"><span class="mark" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="5" cy="5" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="8" cy="18" r="2"/><circle cx="19" cy="17" r="2"/><path d="M7 6l9 1M6 7l2 9M10 17l7 0M17 9l2 6"/></svg></span><span>Brecha digital<span class="brandsmall">Argentina · Datos abiertos</span></span></a>
-  <div class="navlinks"><a href="#contexto">Contexto</a><a href="#explorador">Explorar</a><a href="#hallazgos">Hallazgos</a><a href="#metodologia">Metodología</a></div>
+  <a class="brand" href="#inicio"><span class="mark" aria-hidden="true"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="5" cy="5" r="2"/><circle cx="18" cy="7" r="2"/><circle cx="8" cy="18" r="2"/><circle cx="19" cy="17" r="2"/><path d="M7 6l9 1M6 7l2 9M10 17l7 0M17 9l2 6"/></svg></span><span>Brecha digital<span class="brandsmall">Jujuy · Argentina · Datos abiertos</span></span></a>
+  <div class="navlinks"><a href="#contexto">Contexto</a><a href="#jujuy">Jujuy</a><a href="#hallazgos">Hallazgos</a><a href="#pais">El país</a><a href="#metodologia">Metodología</a></div>
   <span class="header-tag">Especial de datos · 2026</span>
 </div></nav>
 <main>
 <section class="hero" id="inicio"><div class="shell">
   <div class="hero-copy">
-    <div class="eyebrow">Argentina / Conectividad / Análisis federal</div>
-    <h1>Un país.<br>Distintas formas de <em>estar conectado.</em></h1>
-    <p class="lead">La brecha digital de Argentina, <strong>provincia por provincia.</strong> Una investigación sobre cuántos accesos a internet fijo existen, qué tecnología utilizan y qué velocidad ofrecen. Porque conectarse no significa lo mismo en todo el país.</p>
-    <div class="btns"><a href="#explorador" class="btn-primary">Explorar los datos <span aria-hidden="true">↗</span></a><a href="#contexto" class="btn-ghost">Conocer el proyecto <span aria-hidden="true">↘</span></a></div>
-    <div class="hero-byline">Por Micaela López · Datos ENACOM · 2.º trimestre de 2026</div>
+    <div class="eyebrow">Jujuy / Conectividad / Análisis departamental</div>
+    <h1>Una provincia.<br>Distintas formas de <em>estar conectada.</em></h1>
+    <p class="lead">La brecha digital de Jujuy, <strong>departamento por departamento.</strong> Un trabajo que nació como tesis final integradora y hoy compara también a Jujuy con el resto del país. Es la única provincia argentina con datos de acceso, tecnología y velocidad desagregados a nivel departamental.</p>
+    <div class="btns"><a href="#jujuy" class="btn-primary">Explorar los departamentos <span aria-hidden="true">↗</span></a><a href="#contexto" class="btn-ghost">Conocer el proyecto <span aria-hidden="true">↘</span></a></div>
+    <div class="hero-byline">Por Micaela López · Datos ENACOM + INDEC · 2.º trimestre de 2026</div>
   </div>
-  <div class="hero-art" aria-label="Mapa ilustrativo de Argentina coloreado según la penetración de internet fijo">
-    <svg id="heroMap" class="hero-map" role="img" aria-label="Mapa de Argentina"></svg>
-    <div class="float-card"><div class="cap">Argentina · Accesos a internet fijo</div><div class="big">85,4</div><div class="sub">accesos cada 100 hogares en 2026</div><div class="change"><span aria-hidden="true">↗</span> En 2014: 49,9</div></div>
-    <div class="hero-tag">Jujuy / Punto de partida</div>
+  <div class="hero-art" aria-label="Mapa ilustrativo de Jujuy coloreado según la penetración de internet fijo por departamento">
+    <svg id="heroMap" class="hero-map" role="img" aria-label="Mapa de los departamentos de Jujuy"></svg>
+    <div class="float-card"><div class="cap">Jujuy · Accesos a internet fijo</div><div class="big">66,4</div><div class="sub">accesos cada 100 hogares en 2026</div><div class="change"><span aria-hidden="true">↗</span> En 2014: 18,7</div></div>
+    <a href="#pais" class="hero-tag">Argentina · ver el país ↓</a>
   </div>
 </div></section>
-<div class="ticker"><div class="shell"><span>UN RECORRIDO FEDERAL</span><i>✦</i><strong>24 jurisdicciones</strong><i>✦</i><strong>3 indicadores</strong><i>✦</i><strong>2014—2026</strong><i>✦</i><span>UNA PREGUNTA: ¿QUIÉN PUEDE CONECTARSE?</span></div></div>
+<div class="ticker"><div class="shell"><span>UN RECORRIDO DEPARTAMENTAL</span><i>✦</i><strong>16 departamentos</strong><i>✦</i><strong>3 indicadores</strong><i>✦</i><strong>2014—2026</strong><i>✦</i><span>LA ÚNICA PROVINCIA CON DESAGREGACIÓN DEPARTAMENTAL</span></div></div>
 <section class="context" id="contexto"><div class="shell">
-  <div><div class="eyebrow">01 / El punto de partida</div><h2 class="section-title">La conexión también marca desigualdades.</h2><p class="kicker">En una sociedad donde casi todo pasa por internet, las posibilidades no son iguales para todos.</p></div>
+  <div><div class="eyebrow">01 / El punto de partida</div><h2 class="section-title">La conexión también marca desigualdades dentro de Jujuy.</h2><p class="kicker">Entre la Puna, la Quebrada, los Valles y el Ramal, conectarse no significa lo mismo en todos lados.</p></div>
   <div><p>Estudiar, trabajar, acceder a servicios de salud, resolver trámites y utilizar herramientas de inteligencia artificial requiere conectividad. Pero <span class="emphasized">no alcanza con saber que existe internet: también importa cómo llega, cuánto alcanza y con qué velocidad funciona.</span></p>
-   <p>Este proyecto reúne datos de ENACOM para comparar el internet fijo en las 23 provincias y la Ciudad Autónoma de Buenos Aires. Una lectura federal para observar diferencias de acceso, tecnología y velocidad.</p>
-   <div class="context-rule"></div><p>El análisis parte de Jujuy, donde se desarrolló el trabajo académico original, y amplía la mirada al resto del país. Los datos se pueden explorar, comparar y descargar.</p>
+   <p>Este proyecto nació como un trabajo final integrador sobre Jujuy, cruzando datos de ENACOM por localidad con los hogares del Censo 2022 (INDEC) para desagregar la información a nivel departamental — algo que ninguna otra provincia argentina tiene disponible todavía.</p>
+   <div class="context-rule"></div><p>Después de mirar hacia adentro, la mirada se amplía al resto del país para comparar a Jujuy con las otras 23 jurisdicciones. Los datos se pueden explorar, comparar y descargar en ambos niveles.</p>
   </div>
 </div></section>
 <section class="question" id="indicadores"><div class="shell"><div class="eyebrow">02 / La lectura de los datos</div><h2 class="section-title">Tres indicadores para entender una misma brecha.</h2>
   <div class="question-cards">
     <article class="q-card"><div class="q-no">01 / ACCESO</div><h3>Penetración</h3><p>Cuántos accesos a internet fijo hay por cada 100 hogares. No equivale necesariamente al porcentaje de hogares conectados.</p><div class="mini">Accesos / 100 hogares</div></article>
     <article class="q-card"><div class="q-no">02 / TECNOLOGÍA</div><h3>Fibra óptica</h3><p>Qué proporción de los accesos utiliza fibra óptica. Permite aproximarnos a las diferencias en tecnologías disponibles.</p><div class="mini">% del total de accesos</div></article>
-    <article class="q-card"><div class="q-no">03 / RENDIMIENTO</div><h3>Velocidad</h3><p>La velocidad media de descarga contratada. Permite comparar una dimensión del servicio entre provincias.</p><div class="mini">Megabits por segundo</div></article>
+    <article class="q-card"><div class="q-no">03 / RENDIMIENTO</div><h3>Velocidad</h3><p>La velocidad media de descarga contratada. Permite comparar esta dimensión del servicio entre departamentos y entre provincias.</p><div class="mini">Megabits por segundo</div></article>
   </div>
 </div></section>
+<section class="explorer" id="jujuy"><div class="shell">
+  <div class="eyebrow">03 / Explorador departamental</div>
+  <div class="explorer-top"><h2 class="section-title">Explorá Jujuy<br>departamento por departamento.</h2><p>Elegí un indicador y seleccioná un departamento en el mapa o el ranking. El detalle se actualiza automáticamente.</p></div>
+  <div class="dashboard">
+    <div class="board-label"><span>Panel de Jujuy / 2.º trimestre 2026</span><span>Fuente: ENACOM + INDEC (Censo 2022)</span></div>
+    <div class="controls"><span class="lbl">Indicador</span><div class="seg" id="segJ" role="group" aria-label="Elegir indicador"><button type="button" data-m="pen" aria-pressed="true">Penetración</button><button type="button" data-m="fibra" aria-pressed="false">Fibra óptica</button><button type="button" data-m="vel" aria-pressed="false">Velocidad</button></div></div>
+    <div class="natrow" id="natrowJ" aria-label="Indicadores provinciales"></div>
+    <div class="main"><div class="card map-card" data-tag="JUJUY · 16 DEPARTAMENTOS"><h3 id="maptitleJ">Penetración por departamento</h3><svg id="mapJ" class="mapviz" role="img" aria-label="Mapa interactivo de los departamentos de Jujuy"></svg><div class="legend"><div class="legbar"></div><div class="legends"><span id="legminJ"></span><span id="legmaxJ"></span></div><div class="legcap" id="legcapJ"></div></div></div>
+    <div class="card"><h3 id="ranktitleJ">Ranking de departamentos</h3><div class="rank" id="rankJ"></div></div></div>
+    <div class="card province-detail detail-standalone"><h3>El departamento seleccionado</h3><div class="dname" id="dnameJ">Dr. Manuel Belgrano</div><div class="dreg" id="drankJ"></div><div class="metrics" id="metricsJ"></div></div>
+  </div>
+  <p class="explorer-note">* Los valores corresponden a accesos de internet fijo reportados. La penetración puede superar 100 porque incluye conexiones no residenciales — algo especialmente marcado en Susques y Cochinoca. Los departamentos son una fotografía del 2.º trimestre de 2026: a diferencia de Jujuy y el país, todavía no existe una serie histórica anual por departamento.</p>
+</div></section>
+<section class="findings" id="hallazgos"><div class="shell">
+  <div class="eyebrow">04 / Hallazgos de Jujuy</div><h2 class="section-title">Lo que los datos departamentales dejan ver.</h2>
+  <p class="findings-intro">Detrás del promedio provincial hay realidades muy distintas entre los 16 departamentos. Estas son algunas de las relaciones que aparecen al comparar los datos.</p>
+  <div class="finding-grid">
+    <article class="finding"><div class="finding-top"><span class="finding-no">HALLAZGO / 01</span><span class="finding-no">ACCESO</span></div><div class="fstat">5,7×</div><h3>Puna adentro, extremos opuestos.</h3><p>Susques (114,6) y Cochinoca (100,3) accesos cada 100 hogares, impulsados por conexiones no residenciales, contra Humahuaca (20,6) o Yavi (20,2) en el otro extremo.</p></article>
+    <article class="finding"><div class="finding-top"><span class="finding-no">HALLAZGO / 02</span><span class="finding-no">TECNOLOGÍA</span></div><div class="fstat">90,9<small>%</small></div><h3>La fibra llegó de forma desigual.</h3><p>Cochinoca concentra el 90,9% de sus accesos en fibra óptica, efecto del Plan Federal de Internet / ARSAT llegando a Abra Pampa, mientras varios departamentos de la Puna y la Quebrada rondan el 0%.</p></article>
+    <article class="finding"><div class="finding-top"><span class="finding-no">HALLAZGO / 03</span><span class="finding-no">RENDIMIENTO</span></div><div class="fstat">36,5<small> Mbps</small></div><h3>La velocidad tampoco es pareja.</h3><p>La velocidad media provincial es de 101,7 Mbps, pero Ledesma (36,5) y Palpalá (57,1) quedan muy por debajo, en dos de los departamentos más poblados.</p></article>
+    <article class="finding"><div class="finding-top"><span class="finding-no">HALLAZGO / 04</span><span class="finding-no">JUJUY · PAÍS</span></div><div class="fstat">16<small> / 24</small></div><h3>La brecha no termina en la frontera provincial.</h3><p>A nivel nacional Jujuy ocupa el puesto 16 en penetración. Pero la distancia entre sus propios departamentos es incluso mayor que la que separa a las 24 jurisdicciones del país entre sí.</p></article>
+  </div>
+  <div class="quote"><span class="symbol" aria-hidden="true">“</span><p>En Jujuy la brecha no es solo entre quienes tienen conexión y quienes no. También es entre quienes se conectan por fibra y quienes dependen de un enlace satelital en la Puna.</p></div>
+</div></section>
+<section class="pais-intro" id="pais"><div class="shell">
+  <div class="eyebrow">05 / Segundo nivel</div>
+  <h2 class="section-title">Ampliar la mirada al país.</h2>
+  <p class="intro-p">Jujuy es una de las 24 jurisdicciones de Argentina. Esta sección compara el panorama provincial del país completo con los mismos tres indicadores, y se irá completando en los próximos días.</p>
+</div></section>
 <section class="explorer" id="explorador"><div class="shell">
-  <div class="eyebrow">03 / Explorador interactivo</div>
-  <div class="explorer-top"><h2 class="section-title">Explorá el país<br>desde los datos.</h2><p>Elegí un indicador y seleccioná una provincia en el mapa o el ranking. Los gráficos y el detalle se actualizan automáticamente.</p></div>
+  <div class="eyebrow">Explorador nacional</div>
+  <div class="explorer-top"><h2 class="subhead">Explorá el país<br>desde los datos.</h2><p>Elegí un indicador y seleccioná una provincia en el mapa o el ranking. Los gráficos y el detalle se actualizan automáticamente.</p></div>
   <div class="dashboard">
     <div class="board-label"><span>Panel federal / 2.º trimestre 2026</span><span>Fuente: ENACOM · Datos abiertos</span></div>
     <div class="controls"><span class="lbl">Indicador</span><div class="seg" id="seg" role="group" aria-label="Elegir indicador"><button type="button" data-m="pen" aria-pressed="true">Penetración</button><button type="button" data-m="fibra" aria-pressed="false">Fibra óptica</button><button type="button" data-m="vel" aria-pressed="false">Velocidad</button></div></div>
     <div class="natrow" id="natrow" aria-label="Indicadores nacionales"></div>
-    <div class="main"><div class="card map-card"><h3 id="maptitle">Penetración por provincia</h3><svg id="map" role="img" aria-label="Mapa interactivo de Argentina"></svg><div class="legend"><div class="legbar"></div><div class="legends"><span id="legmin"></span><span id="legmax"></span></div><div class="legcap" id="legcap"></div></div></div>
+    <div class="main"><div class="card map-card" data-tag="ARGENTINA · 24 JURISDICCIONES"><h3 id="maptitle">Penetración por provincia</h3><svg id="map" class="mapviz" role="img" aria-label="Mapa interactivo de Argentina"></svg><div class="legend"><div class="legbar"></div><div class="legends"><span id="legmin"></span><span id="legmax"></span></div><div class="legcap" id="legcap"></div></div></div>
     <div class="card"><h3 id="ranktitle">Ranking de provincias</h3><div class="rank" id="rank"></div></div></div>
     <div class="lower"><div class="card province-detail"><h3>La provincia seleccionada</h3><div class="dname" id="dname">Jujuy</div><div class="dreg" id="drank"></div><div class="metrics" id="metrics"></div></div>
     <div class="card"><h3 id="sparktitle">Evolución 2014–2026</h3><svg id="spark" role="img" aria-label="Gráfico de evolución histórica"></svg><div class="sparkleg"><span><span class="dot" style="background:var(--gold)"></span><span id="legprov">Jujuy</span></span><span><span class="dot" style="background:var(--faint)"></span>Serie nacional</span></div></div></div>
   </div>
   <p class="explorer-note">* Los valores corresponden a accesos de internet fijo reportados. El indicador de penetración puede superar 100 porque incluye conexiones no residenciales. La serie histórica compara penetración, incluso cuando el indicador seleccionado es otro.</p>
 </div></section>
-<section class="findings" id="hallazgos"><div class="shell">
-  <div class="eyebrow">04 / Los hallazgos</div><h2 class="section-title">Lo que los números dejan ver.</h2>
+<section class="findings" id="hallazgos-pais"><div class="shell">
+  <div class="eyebrow">Hallazgos nacionales</div><h2 class="subhead">Lo que los números del país dejan ver.</h2>
   <p class="findings-intro">Detrás de los promedios nacionales hay realidades diferentes. Estas son algunas de las relaciones que aparecen al comparar los datos del archivo de trabajo.</p>
   <div class="finding-grid">
     <article class="finding"><div class="finding-top"><span class="finding-no">HALLAZGO / 01</span><span class="finding-no">2014—2026</span></div><div class="fstat">+35,5</div><h3>Una década de crecimiento.</h3><p>La serie nacional pasa de 49,9 a 85,4 accesos fijos por cada 100 hogares. El incremento no significa que todas las provincias hayan avanzado al mismo ritmo.</p></article>
     <article class="finding"><div class="finding-top"><span class="finding-no">HALLAZGO / 02</span><span class="finding-no">ACCESO</span></div><div class="fstat">2,4×</div><h3>El territorio todavía importa.</h3><p>En la comparación por penetración, CABA registra 119,9 accesos por cada 100 hogares y Formosa 50,1. La diferencia entre los dos extremos ronda las 2,4 veces.</p></article>
     <article class="finding"><div class="finding-top"><span class="finding-no">HALLAZGO / 03</span><span class="finding-no">TECNOLOGÍA</span></div><div class="fstat">84,1<small>%</small></div><h3>No todos se conectan igual.</h3><p>Tucumán registra la mayor participación de fibra óptica (84,1% del total de accesos), mientras Tierra del Fuego muestra una de las más bajas (11,7%).</p></article>
-    <article class="finding"><div class="finding-top"><span class="finding-no">HALLAZGO / 04</span><span class="finding-no">JUJUY</span></div><div class="fstat">16<small> / 24</small></div><h3>Jujuy como punto de partida.</h3><p>Jujuy ocupa el puesto 16 en penetración, con 66,4 accesos por cada 100 hogares. La velocidad media consignada es de 101,7 Mbps: una invitación a mirar también la calidad del acceso.</p></article>
+    <article class="finding"><div class="finding-top"><span class="finding-no">HALLAZGO / 04</span><span class="finding-no">JUJUY</span></div><div class="fstat">16<small> / 24</small></div><h3>Jujuy, vista desde el país.</h3><p>A nivel nacional Jujuy ocupa el puesto 16 en penetración, con 66,4 accesos por cada 100 hogares. Como vimos antes, ese promedio esconde una brecha interna entre departamentos todavía mayor.</p></article>
   </div>
   <div class="quote"><span class="symbol" aria-hidden="true">“</span><p>La brecha digital no se explica solo por quién tiene conexión. También importa <strong>qué tipo de conexión puede utilizar y qué oportunidades habilita.</strong></p></div>
 </div></section>
-<section class="data-section" id="tabla"><div class="shell"><div class="eyebrow">05 / Base comparativa</div><h2 class="section-title">Las 24 jurisdicciones,<br>en números.</h2><div class="data-header"><p>Todos los valores del archivo original en una tabla que podés ordenar, filtrar y descargar. Seleccioná una provincia para ir a su detalle en el explorador.</p></div>
+<section class="data-section" id="tabla"><div class="shell"><div class="eyebrow">Base comparativa</div><h2 class="subhead">Las 24 jurisdicciones,<br>en números.</h2><div class="data-header"><p>Todos los valores del archivo original en una tabla que podés ordenar, filtrar y descargar. Seleccioná una provincia para ir a su detalle en el explorador.</p></div>
   <div class="table-tools"><div class="filtergroup"><label for="regionFilter">Filtrar por región</label><select id="regionFilter"><option value="all">Todas las regiones</option><option value="NOA">NOA</option><option value="NEA">NEA</option><option value="Centro">Centro</option><option value="Cuyo">Cuyo</option><option value="Patagonia">Patagonia</option></select><span id="tableCount" class="table-count"></span></div>
   <button class="download" id="downloadData" type="button">↓ Descargar CSV</button></div>
   <div class="tablewrap"><table class="table"><thead><tr><th>#</th><th>Provincia</th><th>Región</th><th><button data-sort="pen" aria-sort="descending">Accesos / 100 hogares ↕</button></th><th><button data-sort="fibra" aria-sort="none">Fibra óptica ↕</button></th><th><button data-sort="vel" aria-sort="none">Velocidad ↕</button></th></tr></thead><tbody id="liveTable"></tbody></table></div>
   <p class="footnote">Nota: “penetración” refiere a la cantidad de accesos por cada 100 hogares. Fibra óptica indica su participación sobre todos los accesos provinciales; velocidad, Mbps promedio. Período: segundo trimestre de 2026, según el archivo proporcionado.</p>
 </div></section>
 <section class="methods" id="metodologia"><div class="shell"><div><div class="eyebrow">06 / Transparencia</div><h2 class="section-title">Cómo se construyó este análisis.</h2><p class="intro">Los números también necesitan contexto, fuentes y criterios de lectura.</p></div>
- <div class="method-grid"><div class="method-card"><span class="label">Fuentes</span><h3>Datos públicos</h3><p>ENACOM (internet fijo), INDEC (Censo 2022) e IGN (límites provinciales), tal como indica el archivo de trabajo.</p></div>
- <div class="method-card"><span class="label">Período</span><h3>2014—2026</h3><p>Serie histórica anual de penetración y fotografía comparativa del segundo trimestre de 2026.</p></div>
+ <div class="method-grid"><div class="method-card"><span class="label">Fuentes</span><h3>Datos públicos</h3><p>ENACOM (internet fijo), INDEC (Censo 2022, hogares por departamento de Jujuy) e IGN / repositorio <em>mgaitan/departamentos_argentina</em> (límites geográficos).</p></div>
+ <div class="method-card"><span class="label">Período</span><h3>2014—2026</h3><p>Serie histórica anual de penetración (Jujuy y país) y fotografía comparativa del segundo trimestre de 2026 para provincias y departamentos.</p></div>
  <div class="method-card"><span class="label">Proceso</span><h3>Análisis y visualización</h3><p>Datos preparados con Python y presentados mediante mapas, rankings, gráficos y tablas interactivas.</p></div>
  <div class="method-card"><span class="label">Alcances</span><h3>Qué no mide</h3><p>Los indicadores agregados no describen por sí solos cobertura municipal, calidad experimentada por usuarios o posibilidades de acceso individual.</p></div></div>
 </div></section>
 </main>
-<footer class="site-footer"><div class="shell"><div><div class="footer-title">Brecha digital en Argentina</div><p>Un proyecto de análisis y visualización de datos, desarrollado a partir de una experiencia de formación en gestión de datos.</p><p style="margin-top:15px"><strong>Micaela López</strong> · Jujuy, Argentina</p></div><div class="source"><p><strong>Fuentes y créditos</strong></p><p>ENACOM · Portal de Datos Abiertos. INDEC · Censo 2022. IGN · Cartografía de provincias. Procesamiento y visualización del proyecto.</p><p style="margin-top:8px">Prototipo editorial para revisión: confirmar corte temporal, series y referencias a fuentes originales antes de publicarlo.</p></div><div class="copy">© 2026 · Proyecto personal de análisis · Diseño experimental</div></div></footer>
+<footer class="site-footer"><div class="shell"><div><div class="footer-title">Brecha digital en Argentina</div><p>Un proyecto de análisis y visualización de datos, desarrollado a partir de una experiencia de formación en gestión de datos.</p><p style="margin-top:15px"><strong>Micaela López</strong> · Jujuy, Argentina</p></div><div class="source"><p><strong>Fuentes y créditos</strong></p><p>ENACOM · Portal de Datos Abiertos. INDEC · Censo 2022. IGN · Cartografía de provincias y departamentos. Procesamiento y visualización del proyecto.</p><p style="margin-top:8px">Prototipo editorial para revisión: confirmar corte temporal, series y referencias a fuentes originales antes de publicarlo.</p></div><div class="copy">© 2026 · Proyecto personal de análisis · Diseño experimental</div></div></footer>
 <div id="tip" role="tooltip" aria-live="polite"></div>
 <script type="application/json" id="data">__DATA__</script>
 <script type="application/json" id="geo">__GEO__</script>
+<script type="application/json" id="dataJujuy">__DATA_JUJUY__</script>
+<script type="application/json" id="geoJujuy">__GEO_JUJUY__</script>
 <script>
 "use strict";
+const svgNS='http://www.w3.org/2000/svg';
+function eachC(coords,f){ if(typeof coords[0]==='number'){f(coords);} else coords.forEach(c=>eachC(c,f)); }
+function lerp(a,b,t){return a+(b-a)*t;}
+function hex(h){return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];}
+const C0=hex('#17233f'),C1=hex('#2f7e8f'),C2=hex('#6fe3d2');
+function scale(t){ t=Math.max(0,Math.min(1,t)); let a,b,u;
+  if(t<.5){a=C0;b=C1;u=t/.5;}else{a=C1;b=C2;u=(t-.5)/.5;}
+  return `rgb(${Math.round(lerp(a[0],b[0],u))},${Math.round(lerp(a[1],b[1],u))},${Math.round(lerp(a[2],b[2],u))})`;
+}
+const norm=s=>(s||'').toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
+const tip=document.getElementById('tip');
+function moveTip(ev){ const x=ev.clientX+14,y=ev.clientY+14;
+  tip.style.left=Math.min(x,innerWidth-tip.offsetWidth-8)+'px';
+  tip.style.top=Math.min(y,innerHeight-tip.offsetHeight-8)+'px'; }
+function hideTip(){ tip.style.opacity=0; }
+document.addEventListener('mousemove',e=>{ if(tip.style.opacity==='1')moveTip(e); });
+
+function makeMetrics(unit){
+  return {
+    pen:{label:'Penetración',short:'penetración',unit:'cada 100 hogares',dec:1,mapt:'Penetración por '+unit,legcap:'Accesos a internet fijo cada 100 hogares.'},
+    fibra:{label:'Fibra óptica',short:'fibra óptica',unit:'% de accesos',dec:1,mapt:'Fibra óptica por '+unit,legcap:'Participación de la fibra óptica sobre el total de accesos.'},
+    vel:{label:'Velocidad',short:'velocidad media',unit:'Mbps',dec:0,mapt:'Velocidad media por '+unit,legcap:'Velocidad media de descarga contratada (Mbps).'}
+  };
+}
+
+// ---------- componente reutilizable: un explorador (mapa + ranking + detalle) ----------
+function createExplorer(cfg){
+  const {geo,items,keyProp,normalize,regionOf,ids,metrics,highlight}=cfg;
+  let METRIC=cfg.initialMetric||'pen', SEL=cfg.defaultSel;
+  let byKey=null;
+  if(normalize){ byKey={}; Object.keys(items).forEach(k=>byKey[norm(k)]=k); }
+  function keyFor(raw){ return normalize ? byKey[norm(raw)] : raw; }
+
+  let minLon=1e9,maxLon=-1e9,minLat=1e9,maxLat=-1e9;
+  geo.features.forEach(ft=>eachC(ft.geometry.coordinates,c=>{
+    if(c[0]<minLon)minLon=c[0]; if(c[0]>maxLon)maxLon=c[0];
+    if(c[1]<minLat)minLat=c[1]; if(c[1]>maxLat)maxLat=c[1];
+  }));
+  const latmid=(minLat+maxLat)/2, kx=Math.cos(latmid*Math.PI/180);
+  const geoW=(maxLon-minLon)*kx, geoH=(maxLat-minLat);
+  const MH=640, MW=MH*geoW/geoH;
+  const px=lon=>(lon-minLon)*kx/geoW*MW, py=lat=>(maxLat-lat)/geoH*MH;
+  function ringPath(ring){ let d='M'; ring.forEach((c,i)=>{ d+=(i?'L':'')+px(c[0]).toFixed(1)+','+py(c[1]).toFixed(1); }); return d+'Z'; }
+  function featPath(geomc){ let d=''; const cs=geomc.coordinates;
+    if(geomc.type==='Polygon') cs.forEach(r=>d+=ringPath(r));
+    else cs.forEach(poly=>poly.forEach(r=>d+=ringPath(r)));
+    return d;
+  }
+
+  const mapEl=document.getElementById(ids.map);
+  mapEl.setAttribute('viewBox',`0 0 ${MW.toFixed(0)} ${MH}`);
+  const paths={};
+  geo.features.forEach(ft=>{
+    const raw=ft.properties[keyProp]; const dn=keyFor(raw);
+    const p=document.createElementNS(svgNS,'path');
+    p.setAttribute('d',featPath(ft.geometry));
+    if(dn && items[dn]){
+      p.addEventListener('click',()=>select(dn));
+      p.addEventListener('mousemove',ev=>showTip(ev,dn));
+      p.addEventListener('mouseleave',hideTip);
+      paths[dn]=p;
+    }
+    mapEl.appendChild(p);
+  });
+
+  function vals(){ return Object.keys(items).map(k=>items[k][METRIC]).filter(v=>v!=null); }
+  function domain(){ const v=vals(); return [Math.min(...v),Math.max(...v)]; }
+  function fmt(v,m){ m=m||METRIC; if(v==null)return 's/d'; return v.toFixed(metrics[m].dec).replace('.',','); }
+
+  function showTip(ev,k){ const m=metrics[METRIC];
+    tip.innerHTML=`<div class="tn">${k}</div><div><span class="tv">${fmt(items[k][METRIC])}</span> ${m.unit}</div>`;
+    tip.style.opacity=1; moveTip(ev);
+  }
+
+  function paintMap(){ const [mn,mx]=domain();
+    Object.keys(items).forEach(k=>{ const v=items[k][METRIC];
+      if(paths[k]) paths[k].setAttribute('fill', v==null?'#1a2336':scale((v-mn)/(mx-mn||1))); });
+    document.getElementById(ids.legmin).textContent=fmt(mn);
+    document.getElementById(ids.legmax).textContent=fmt(mx);
+    document.getElementById(ids.legcap).textContent=metrics[METRIC].legcap;
+    document.getElementById(ids.maptitle).textContent=metrics[METRIC].mapt;
+  }
+  function paintSel(){ Object.values(paths).forEach(p=>p.classList.remove('sel'));
+    if(paths[SEL]) paths[SEL].classList.add('sel'); }
+
+  const rankEl=document.getElementById(ids.rank);
+  function order(){ return Object.keys(items).filter(k=>items[k][METRIC]!=null).sort((a,b)=>items[b][METRIC]-items[a][METRIC]); }
+  function renderRank(){ const [mn,mx]=domain(); const ord=order();
+    rankEl.innerHTML='';
+    ord.forEach((k,i)=>{ const v=items[k][METRIC];
+      const b=document.createElement('button');
+      b.className='row'+(k===SEL?' sel':'')+(highlight && k===highlight?' juj':'');
+      b.innerHTML=`<span class="rpos mono">${i+1}</span>
+        <span class="rname">${k}</span>
+        <span class="rbarwrap"><span class="rbar" style="width:${Math.max(6,(v-mn)/(mx-mn||1)*100)}%;background:${scale((v-mn)/(mx-mn||1))}"></span>
+        <span class="rval">${fmt(v)}</span></span>`;
+      b.addEventListener('click',()=>select(k));
+      rankEl.appendChild(b);
+    });
+    document.getElementById(ids.ranktitle).textContent='Ranking · '+metrics[METRIC].label;
+  }
+  function rankOf(k){ return order().indexOf(k)+1; }
+
+  function renderDetail(){
+    document.getElementById(ids.dname).textContent=SEL;
+    const total=Object.keys(items).length;
+    document.getElementById(ids.drank).textContent=(regionOf(SEL)||'')+' · puesto '+rankOf(SEL)+' de '+total+' en '+metrics[METRIC].short;
+    const mEl=document.getElementById(ids.metrics); mEl.innerHTML='';
+    [['pen','Penetración','cada 100 hog.'],['fibra','Fibra óptica','% accesos'],['vel','Velocidad media','Mbps']]
+    .forEach(([k,lab,u])=>{ const v=items[SEL][k];
+      const d=document.createElement('div'); d.className='metric';
+      d.innerHTML=`<span class="mk">${lab}</span><span class="mv">${fmt(v,k)}<span class="mu">${u}</span></span>`;
+      mEl.appendChild(d);
+    });
+  }
+
+  function renderSpark(){
+    if(!ids.spark) return;
+    const sp=document.getElementById(ids.spark);
+    const CS=getComputedStyle(document.documentElement), col=n=>CS.getPropertyValue(n).trim();
+    const cLine=col('--line'),cFaint=col('--faint'),cMuted=col('--muted'),cAcc=col('--accent');
+    let s,nac,years,label;
+    if(cfg.seriesFixed){ s=cfg.seriesFixed.self; nac=cfg.seriesFixed.nac; years=cfg.seriesFixed.years; label=cfg.seriesFixed.label; }
+    else { s=cfg.seriesByItem[SEL]||[]; nac=cfg.nacSeries; years=cfg.years; label=SEL; }
+    const W=560,H=240,PAD=34;
+    const all=s.concat(nac).filter(v=>v!=null); const ymax=Math.max(...all)*1.08, ymin=0;
+    const X=i=>PAD+(i/(years.length-1))*(W-PAD-14);
+    const Y=v=>H-26-((v-ymin)/(ymax-ymin))*(H-26-14);
+    function line(arr){ return arr.map((v,i)=>v==null?null:(X(i).toFixed(1)+','+Y(v).toFixed(1)))
+      .filter(Boolean).map((p,i)=>(i?'L':'M')+p).join(''); }
+    let g='';
+    [0,25,50,75,100].forEach(gv=>{ if(gv>ymax)return; const y=Y(gv);
+      g+=`<line x1="${PAD}" y1="${y}" x2="${W-14}" y2="${y}" stroke="${cLine}" stroke-width="1"/>`;
+      g+=`<text x="${PAD-6}" y="${y+3}" text-anchor="end" font-size="10" fill="${cFaint}">${gv}</text>`;
+    });
+    years.forEach((yr,i)=>{ if(yr%2!==0 && yr!==years[years.length-1])return;
+      g+=`<text x="${X(i)}" y="${H-8}" text-anchor="middle" font-size="9.5" fill="${cFaint}">${String(yr).slice(2)}</text>`; });
+    g+=`<path d="${line(nac)}" fill="none" stroke="${cMuted}" stroke-width="2" stroke-dasharray="4 4"/>`;
+    g+=`<path d="${line(s)}" fill="none" stroke="${cAcc}" stroke-width="2.6"/>`;
+    const li=s.length-1;
+    if(s[li]!=null){ g+=`<circle cx="${X(li)}" cy="${Y(s[li])}" r="3.5" fill="${cAcc}"/>`;
+      g+=`<text x="${X(li)-4}" y="${Y(s[li])-8}" text-anchor="end" font-size="11" fill="${cAcc}" font-weight="600">${fmt(s[li],'pen')}</text>`; }
+    if(nac[li]!=null){ g+=`<text x="${X(li)-4}" y="${Y(nac[li])-8}" text-anchor="end" font-size="10" fill="${cMuted}">${fmt(nac[li],'pen')}</text>`; }
+    sp.setAttribute('viewBox',`0 0 ${W} ${H}`);
+    sp.innerHTML=g;
+    document.getElementById(ids.legprov).textContent=label;
+    document.getElementById(ids.sparktitle).textContent=cfg.sparkTitle||('Evolución 2014–2026 · penetración ('+label+' vs. país)');
+  }
+
+  function natStats(){
+    if(!ids.natrow) return;
+    const nr=document.getElementById(ids.natrow);
+    const cards=cfg.natCards({items,fmt});
+    nr.innerHTML=cards.map(c=>`<div class="stat"><div class="n mono">${c[0]}</div><div class="l">${c[1]}</div></div>`).join('');
+  }
+
+  function select(k){ SEL=k; paintSel(); renderRank(); renderDetail(); renderSpark(); if(cfg.onSelect) cfg.onSelect(k); }
+
+  const segEl=document.getElementById(ids.seg);
+  if(segEl) segEl.addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b)return;
+    METRIC=b.dataset.m;
+    segEl.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    paintMap(); renderRank(); renderDetail();
+  });
+
+  natStats(); paintMap(); paintSel(); renderRank(); renderDetail(); renderSpark();
+
+  return {select, get sel(){return SEL;}, geo:{MW,MH,px,py,featPath}, paths, items};
+}
+
+// ---------- datos ----------
 const DATA=JSON.parse(document.getElementById('data').textContent);
 const GEO=JSON.parse(document.getElementById('geo').textContent);
 const PROV=DATA.provincias, SERIE=DATA.serie, NAC=DATA.nacional, YEARS=DATA.years;
-const norm=s=>(s||'').toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
-// índice nombre-normalizado -> nombre de dato
-const byNorm={}; Object.keys(PROV).forEach(p=>byNorm[norm(p)]=p);
-const REG={ // región para el detalle
+const REG={
  'Jujuy':'NOA','Salta':'NOA','Tucumán':'NOA','Catamarca':'NOA','Santiago Del Estero':'NOA','La Rioja':'NOA',
  'Formosa':'NEA','Chaco':'NEA','Corrientes':'NEA','Misiones':'NEA',
  'Córdoba':'Centro','Santa Fe':'Centro','Entre Ríos':'Centro','La Pampa':'Centro',
  'Buenos Aires':'Centro','CABA':'Centro',
  'Mendoza':'Cuyo','San Juan':'Cuyo','San Luis':'Cuyo',
  'Neuquén':'Patagonia','Río Negro':'Patagonia','Chubut':'Patagonia','Santa Cruz':'Patagonia','Tierra Del Fuego':'Patagonia'};
-const METRICS={
- pen:{label:'Penetración',short:'penetración',unit:'cada 100 hogares',dec:1,mapt:'Penetración por provincia',legcap:'Accesos a internet fijo cada 100 hogares.'},
- fibra:{label:'Fibra óptica',short:'fibra óptica',unit:'% de accesos',dec:1,mapt:'Fibra óptica por provincia',legcap:'Participación de la fibra óptica sobre el total de accesos.'},
- vel:{label:'Velocidad',short:'velocidad media',unit:'Mbps',dec:0,mapt:'Velocidad media por provincia',legcap:'Velocidad media de descarga contratada (Mbps).'}
-};
-let METRIC='pen', SEL='Jujuy';
 
-// ---------- proyección del mapa ----------
-let minLon=1e9,maxLon=-1e9,minLat=1e9,maxLat=-1e9;
-function eachC(coords,f){ if(typeof coords[0]==='number'){f(coords);} else coords.forEach(c=>eachC(c,f)); }
-GEO.features.forEach(ft=>eachC(ft.geometry.coordinates,c=>{
-  if(c[0]<minLon)minLon=c[0]; if(c[0]>maxLon)maxLon=c[0];
-  if(c[1]<minLat)minLat=c[1]; if(c[1]>maxLat)maxLat=c[1];
-}));
-const latmid=(minLat+maxLat)/2, kx=Math.cos(latmid*Math.PI/180);
-const geoW=(maxLon-minLon)*kx, geoH=(maxLat-minLat);
-const MH=640, MW=MH*geoW/geoH;
-const px=lon=>(lon-minLon)*kx/geoW*MW, py=lat=>(maxLat-lat)/geoH*MH;
-function ringPath(ring){ let d='M'; ring.forEach((c,i)=>{ d+=(i?'L':'')+px(c[0]).toFixed(1)+','+py(c[1]).toFixed(1); }); return d+'Z'; }
-function featPath(geom){
-  let d=''; const cs=geom.coordinates;
-  if(geom.type==='Polygon') cs.forEach(r=>d+=ringPath(r));
-  else cs.forEach(poly=>poly.forEach(r=>d+=ringPath(r)));
-  return d;
-}
-const mapEl=document.getElementById('map');
-mapEl.setAttribute('viewBox',`0 0 ${MW.toFixed(0)} ${MH}`);
-const paths={};
-GEO.features.forEach(ft=>{
-  const key=ft.properties.prov; const dn=byNorm[key];
-  const p=document.createElementNS('http://www.w3.org/2000/svg','path');
-  p.setAttribute('d',featPath(ft.geometry));
-  p.dataset.prov=dn||''; p.dataset.key=key;
-  if(dn){ p.addEventListener('click',()=>select(dn));
-    p.addEventListener('mousemove',ev=>showTip(ev,dn));
-    p.addEventListener('mouseleave',hideTip); }
-  mapEl.appendChild(p); if(dn) paths[dn]=p;
+const DATAJ=JSON.parse(document.getElementById('dataJujuy').textContent);
+const GEOJ=JSON.parse(document.getElementById('geoJujuy').textContent);
+const DEPTOS=DATAJ.departamentos, PROVINCIAL=DATAJ.provincial;
+
+// ---------- explorador de Jujuy por departamento ----------
+const explorerJujuy=createExplorer({
+  geo:GEOJ, items:DEPTOS, keyProp:'dep', normalize:false,
+  regionOf:k=>(DEPTOS[k]&&DEPTOS[k].region)||'',
+  ids:{seg:'segJ',natrow:'natrowJ',map:'mapJ',maptitle:'maptitleJ',legmin:'legminJ',legmax:'legmaxJ',legcap:'legcapJ',rank:'rankJ',ranktitle:'ranktitleJ',dname:'dnameJ',drank:'drankJ',metrics:'metricsJ'},
+  metrics:makeMetrics('departamento'),
+  defaultSel:'Dr. Manuel Belgrano',
+  natCards:({items,fmt})=>{
+    const ord=Object.keys(items).sort((a,b)=>items[b].pen-items[a].pen);
+    const top=ord[0], bot=ord[ord.length-1];
+    return [
+      [fmt(PROVINCIAL.pen,'pen'),'accesos cada 100 hogares · Jujuy'],
+      [top+' '+fmt(items[top].pen,'pen'),'departamento con mayor penetración'],
+      [bot+' '+fmt(items[bot].pen,'pen'),'departamento con menor penetración'],
+      ['16','departamentos analizados']
+    ];
+  }
 });
 
-// ---------- escala de color ----------
-function lerp(a,b,t){return a+(b-a)*t;}
-function hex(h){return [parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)];}
-const C0=hex('#17233f'),C1=hex('#2f7e8f'),C2=hex('#6fe3d2');
-function scale(t){ // 0..1 -> color
-  t=Math.max(0,Math.min(1,t)); let a,b,u;
-  if(t<.5){a=C0;b=C1;u=t/.5;}else{a=C1;b=C2;u=(t-.5)/.5;}
-  return `rgb(${Math.round(lerp(a[0],b[0],u))},${Math.round(lerp(a[1],b[1],u))},${Math.round(lerp(a[2],b[2],u))})`;
-}
-function vals(){ return Object.keys(PROV).map(p=>PROV[p][METRIC]).filter(v=>v!=null); }
-function domain(){ const v=vals(); return [Math.min(...v),Math.max(...v)]; }
-
-// ---------- render ----------
-const tip=document.getElementById('tip');
-function fmt(v,m=METRIC){ if(v==null)return 's/d'; return v.toFixed(METRICS[m].dec).replace('.',','); }
-function showTip(ev,p){ const m=METRICS[METRIC];
-  tip.innerHTML=`<div class="tn">${p}</div><div><span class="tv">${fmt(PROV[p][METRIC])}</span> ${m.unit}</div>`;
-  tip.style.opacity=1; moveTip(ev); }
-function moveTip(ev){ const x=ev.clientX+14,y=ev.clientY+14;
-  tip.style.left=Math.min(x,innerWidth-tip.offsetWidth-8)+'px';
-  tip.style.top=Math.min(y,innerHeight-tip.offsetHeight-8)+'px'; }
-function hideTip(){ tip.style.opacity=0; }
-mapEl.addEventListener('mousemove',e=>{ if(tip.style.opacity==='1')moveTip(e); });
-
-function paintMap(){ const [mn,mx]=domain();
-  Object.keys(PROV).forEach(p=>{ const v=PROV[p][METRIC];
-    if(paths[p]) paths[p].setAttribute('fill', v==null?'#1a2336':scale((v-mn)/(mx-mn||1))); });
-  document.getElementById('legmin').textContent=fmt(mn);
-  document.getElementById('legmax').textContent=fmt(mx);
-  document.getElementById('legcap').textContent=METRICS[METRIC].legcap;
-  document.getElementById('maptitle').textContent=METRICS[METRIC].mapt;
-}
-function paintSel(){ Object.values(paths).forEach(p=>p.classList.remove('sel'));
-  if(paths[SEL]) paths[SEL].classList.add('sel'); }
-
-const rankEl=document.getElementById('rank');
-function renderRank(){ const [mn,mx]=domain();
-  const order=Object.keys(PROV).filter(p=>PROV[p][METRIC]!=null)
-    .sort((a,b)=>PROV[b][METRIC]-PROV[a][METRIC]);
-  rankEl.innerHTML='';
-  order.forEach((p,i)=>{ const v=PROV[p][METRIC];
-    const b=document.createElement('button');
-    b.className='row'+(p===SEL?' sel':'')+(p==='Jujuy'?' juj':'');
-    b.innerHTML=`<span class="rpos mono">${i+1}</span>
-      <span class="rname">${p}</span>
-      <span class="rbarwrap"><span class="rbar" style="width:${Math.max(6,(v-mn)/(mx-mn||1)*100)}%;background:${scale((v-mn)/(mx-mn||1))}"></span>
-      <span class="rval">${fmt(v)}</span></span>`;
-    b.addEventListener('click',()=>select(p));
-    rankEl.appendChild(b);
-  });
-  document.getElementById('ranktitle').textContent='Ranking · '+METRICS[METRIC].label;
-}
-function rankOf(p){ const order=Object.keys(PROV).filter(q=>PROV[q][METRIC]!=null)
-    .sort((a,b)=>PROV[b][METRIC]-PROV[a][METRIC]); return order.indexOf(p)+1; }
-
-function renderDetail(){
-  document.getElementById('dname').textContent=SEL;
-  document.getElementById('drank').textContent=(REG[SEL]||'')+' · puesto '+rankOf(SEL)+' de 24 en '+METRICS[METRIC].short;
-  const mEl=document.getElementById('metrics'); mEl.innerHTML='';
-  [['pen','Penetración','cada 100 hog.'],['fibra','Fibra óptica','% accesos'],['vel','Velocidad media','Mbps']]
-  .forEach(([k,lab,u])=>{ const v=PROV[SEL][k];
-    const d=document.createElement('div'); d.className='metric';
-    d.innerHTML=`<span class="mk">${lab}</span><span class="mv">${fmt(v,k)}<span class="mu">${u}</span></span>`;
-    mEl.appendChild(d);
-  });
-}
-
-// ---------- sparkline evolución ----------
-const sp=document.getElementById('spark');
-function renderSpark(){
-  const CS=getComputedStyle(document.documentElement), col=n=>CS.getPropertyValue(n).trim();
-  const cLine=col('--line'),cFaint=col('--faint'),cMuted=col('--muted'),cAcc=col('--accent');
-  const W=560,H=240,PAD=34, s=SERIE[SEL]||[];
-  const all=s.concat(NAC).filter(v=>v!=null); const ymax=Math.max(...all)*1.08, ymin=0;
-  const X=i=>PAD+ (i/(YEARS.length-1))*(W-PAD-14);
-  const Y=v=>H-26-((v-ymin)/(ymax-ymin))*(H-26-14);
-  function line(arr){ return arr.map((v,i)=>v==null?null:(X(i).toFixed(1)+','+Y(v).toFixed(1)))
-    .filter(Boolean).map((p,i)=>(i?'L':'M')+p).join(''); }
-  let g='';
-  [0,25,50,75,100].forEach(gv=>{ if(gv>ymax)return; const y=Y(gv);
-    g+=`<line x1="${PAD}" y1="${y}" x2="${W-14}" y2="${y}" stroke="${cLine}" stroke-width="1"/>`;
-    g+=`<text x="${PAD-6}" y="${y+3}" text-anchor="end" font-size="10" fill="${cFaint}">${gv}</text>`;
-  });
-  YEARS.forEach((yr,i)=>{ if(yr%2!==0 && yr!==2026)return;
-    g+=`<text x="${X(i)}" y="${H-8}" text-anchor="middle" font-size="9.5" fill="${cFaint}">${String(yr).slice(2)}</text>`; });
-  g+=`<path d="${line(NAC)}" fill="none" stroke="${cMuted}" stroke-width="2" stroke-dasharray="4 4"/>`;
-  g+=`<path d="${line(s)}" fill="none" stroke="${cAcc}" stroke-width="2.6"/>`;
-  const li=s.length-1;
-  if(s[li]!=null){ g+=`<circle cx="${X(li)}" cy="${Y(s[li])}" r="3.5" fill="${cAcc}"/>`;
-    g+=`<text x="${X(li)-4}" y="${Y(s[li])-8}" text-anchor="end" font-size="11" fill="${cAcc}" font-weight="600">${fmt(s[li],'pen')}</text>`; }
-  if(NAC[li]!=null){ g+=`<text x="${X(li)-4}" y="${Y(NAC[li])-8}" text-anchor="end" font-size="10" fill="${cMuted}">${fmt(NAC[li],'pen')}</text>`; }
-  sp.setAttribute('viewBox',`0 0 ${W} ${H}`);
-  sp.innerHTML=g;
-  document.getElementById('legprov').textContent=SEL;
-  document.getElementById('sparktitle').textContent='Evolución 2014–2026 · penetración ('+SEL+' vs. país)';
-}
-
-function select(p){ SEL=p; paintSel();
-  renderRank(); renderDetail(); renderSpark(); }
-
-// ---------- national stats ----------
-function natStats(){
-  const nr=document.getElementById('natrow');
-  const penLast=NAC[NAC.length-1];
-  const order=Object.keys(PROV).sort((a,b)=>PROV[b].pen-PROV[a].pen);
-  const top=order[0], bot=order[order.length-1];
-  const cards=[
-    [fmt(penLast,'pen'),'accesos cada 100 hogares · país'],
-    [top+' '+fmt(PROV[top].pen,'pen'),'jurisdicción con mayor penetración'],
-    [bot+' '+fmt(PROV[bot].pen,'pen'),'jurisdicción con menor penetración'],
-    ['24','jurisdicciones analizadas']
-  ];
-  nr.innerHTML=cards.map(c=>`<div class="stat"><div class="n mono">${c[0]}</div><div class="l">${c[1]}</div></div>`).join('');
-}
-
-// ---------- métrica toggle ----------
-document.getElementById('seg').addEventListener('click',e=>{
-  const b=e.target.closest('button'); if(!b)return;
-  METRIC=b.dataset.m;
-  document.querySelectorAll('#seg button').forEach(x=>x.setAttribute('aria-pressed',x===b));
-  paintMap(); renderRank(); renderDetail();
+// ---------- explorador nacional ----------
+const explorerNacional=createExplorer({
+  geo:GEO, items:PROV, keyProp:'prov', normalize:true,
+  regionOf:k=>REG[k]||'',
+  ids:{seg:'seg',natrow:'natrow',map:'map',maptitle:'maptitle',legmin:'legmin',legmax:'legmax',legcap:'legcap',rank:'rank',ranktitle:'ranktitle',dname:'dname',drank:'drank',metrics:'metrics',spark:'spark',sparktitle:'sparktitle',legprov:'legprov'},
+  metrics:makeMetrics('provincia'),
+  defaultSel:'Jujuy', highlight:'Jujuy',
+  seriesByItem:SERIE, nacSeries:NAC, years:YEARS,
+  natCards:({items,fmt})=>{
+    const penLast=NAC[NAC.length-1];
+    const ord=Object.keys(items).sort((a,b)=>items[b].pen-items[a].pen);
+    const top=ord[0], bot=ord[ord.length-1];
+    return [
+      [fmt(penLast,'pen'),'accesos cada 100 hogares · país'],
+      [top+' '+fmt(items[top].pen,'pen'),'jurisdicción con mayor penetración'],
+      [bot+' '+fmt(items[bot].pen,'pen'),'jurisdicción con menor penetración'],
+      ['24','jurisdicciones analizadas']
+    ];
+  }
 });
 
-// init
-natStats(); paintMap(); paintSel(); renderRank(); renderDetail(); renderSpark();
-
-
-// Editorial hero: map silhouette is drawn from the same provincial geometry as the explorer.
+// Mapa ilustrativo del hero: dibujado a partir de la misma geometría departamental de Jujuy.
 const heroMap=document.getElementById('heroMap');
 if(heroMap){
+  const {MW,MH,featPath}=explorerJujuy.geo;
   heroMap.setAttribute('viewBox', `0 0 ${MW.toFixed(0)} ${MH}`);
-  GEO.features.forEach(ft=>{
-    const dn=byNorm[ft.properties.prov], p=document.createElementNS('http://www.w3.org/2000/svg','path');
+  GEOJ.features.forEach(ft=>{
+    const dn=ft.properties.dep, p=document.createElementNS(svgNS,'path');
     p.setAttribute('d', featPath(ft.geometry));
-    p.setAttribute('fill', dn=== 'Jujuy' ? '#ffc978' : (dn&&PROV[dn] ? scale(Math.max(0,(PROV[dn].pen-50)/70)) : '#30475a'));
+    const v=DEPTOS[dn]?DEPTOS[dn].pen:null;
+    p.setAttribute('fill', dn==='Dr. Manuel Belgrano' ? '#ffc978' : (v!=null ? scale(Math.max(0,Math.min(1,(v-15)/100))) : '#30475a'));
     p.setAttribute('stroke','#0b2331'); p.setAttribute('stroke-width','1.25');
     heroMap.appendChild(p);
   });
 }
-// A source-of-truth table generated from the data embedded in the supplied prototype.
+
+// Tabla de las 24 jurisdicciones, generada a partir de los datos nacionales embebidos.
 const tableBody=document.getElementById('liveTable'), regionFilter=document.getElementById('regionFilter');
 let sortKey='pen', sortDir=-1;
 const pretty=n=>n==='Tierra Del Fuego'?'Tierra del Fuego':n==='Santiago Del Estero'?'Santiago del Estero':n;
+function fmtTable(v,dec){ if(v==null)return 's/d'; return v.toFixed(dec).replace('.',','); }
 function populateTable(){
   if(!tableBody)return;
   const region=regionFilter.value;
@@ -443,8 +530,8 @@ function populateTable(){
     .sort((a,b)=>sortDir*(PROV[a][sortKey]-PROV[b][sortKey]));
   tableBody.innerHTML=arr.map((p,i)=>`<tr class="${p==='Jujuy'?'featured':''}">
     <td class="ranknum">${i+1}</td><td><button class="table-prov" data-p="${p}" aria-label="Explorar ${p}">${pretty(p)}</button></td>
-    <td class="small-region">${REG[p]||'—'}</td><td class="num">${fmt(PROV[p].pen,'pen')}</td>
-    <td class="num">${fmt(PROV[p].fibra,'fibra')}%</td><td class="num">${fmt(PROV[p].vel,'vel')} Mbps</td></tr>`).join('');
+    <td class="small-region">${REG[p]||'—'}</td><td class="num">${fmtTable(PROV[p].pen,1)}</td>
+    <td class="num">${fmtTable(PROV[p].fibra,1)}%</td><td class="num">${fmtTable(PROV[p].vel,0)} Mbps</td></tr>`).join('');
   document.getElementById('tableCount').textContent=arr.length+' jurisdicciones';
 }
 if(tableBody){
@@ -455,23 +542,19 @@ if(tableBody){
     populateTable();
   }));
   tableBody.addEventListener('click',e=>{let b=e.target.closest('[data-p]');if(!b)return;
-    select(b.dataset.p);document.getElementById('explorador').scrollIntoView({behavior:'smooth'});
+    explorerNacional.select(b.dataset.p);document.getElementById('explorador').scrollIntoView({behavior:'smooth'});
   });
   populateTable();
   document.getElementById('downloadData').addEventListener('click',()=>{
     const csv=['Provincia,Region,Accesos por cada 100 hogares,Fibra (%),Velocidad (Mbps)',
       ...Object.keys(PROV).map(p=>[p,REG[p],PROV[p].pen,PROV[p].fibra,PROV[p].vel].join(','))].join('\n');
-    const url=URL.createObjectURL(new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}));
+    const url=URL.createObjectURL(new Blob(['﻿'+csv],{type:'text/csv;charset=utf-8'}));
     const a=document.createElement('a');a.href=url;a.download='brecha-digital-argentina-2026.csv';a.click();
     setTimeout(()=>URL.revokeObjectURL(url),2500);
   });
 }
-// When a province is chosen, the ranking, chart and province header all stay synchronized.
-const originalSelect=select;
-select=function(p){ originalSelect(p); const detail=document.getElementById('detailHeading');
-  if(detail) detail.textContent=p;
-};
-// Header active highlight on navigation.
+
+// Resalte de la navegación según la sección visible.
 if('IntersectionObserver' in window){
  const sections=document.querySelectorAll('main section[id]');
  const obs=new IntersectionObserver(entries=>{
