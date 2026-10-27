@@ -102,14 +102,19 @@ button,select{touch-action:manipulation}
 .legend{margin-top:12px}.legbar{height:9px;border-radius:6px;background:linear-gradient(90deg,var(--c0),var(--c1),var(--c2))}
 .legends{display:flex;justify-content:space-between;margin-top:6px;font-family:var(--mono);font-size:11px;color:#9db6c0}
 .legcap{color:#829fa8;font-size:11px;margin-top:8px}
+.region-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px;padding-top:12px;border-top:1px solid #203e4c}
+.region-chip{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#9bb5bc}
+.region-chip-dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
 .rank{display:flex;flex-direction:column;gap:3px;max-height:642px;overflow-y:auto;padding-right:6px;scrollbar-color:#3a6070 #112e3d;scrollbar-width:thin}
 .row{display:grid;grid-template-columns:25px minmax(80px,1fr) minmax(90px,44%);gap:10px;align-items:center;background:transparent;border:1px solid transparent;color:#e3e9e8;text-align:left;padding:8px 9px;border-radius:6px;width:100%;transition:background .15s}
 .row:hover{background:#1d4352}.row.sel{background:#2d4a51;border-color:#a88e66}.row.juj .rname{color:var(--gold)}
+.rdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle;flex:none}
 .rpos{font-family:var(--mono);font-size:10px;color:#6f929f}.rname{font-size:12px;text-overflow:ellipsis;overflow:hidden;white-space:nowrap}.rbarwrap{display:flex;align-items:center;gap:7px;width:100%}
 .rbar{height:7px;border-radius:3px;display:block;min-width:5px}.rval{font-family:var(--mono);font-size:10px;min-width:40px;text-align:right;margin-left:auto}
 .lower{display:grid;grid-template-columns:minmax(0,.83fr) minmax(0,1.17fr);gap:18px;margin-top:18px}
 .detail-standalone{margin-top:18px}
-.province-detail .dname{font-family:var(--serif);font-size:33px;letter-spacing:-.04em;line-height:1.15;color:#fff6eb}.province-detail .dreg{font-family:var(--mono);font-size:11px;color:#c2d1cb;margin-top:7px}
+.province-detail .dname{font-family:var(--serif);font-size:33px;letter-spacing:-.04em;line-height:1.15;color:#fff6eb}.province-detail .dreg{font-family:var(--mono);font-size:11px;color:#c2d1cb;margin-top:7px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.region-badge{display:inline-flex;align-items:center;padding:4px 11px;border-radius:20px;border:1px solid;font-weight:600;letter-spacing:.03em;text-transform:uppercase;font-size:10px}
 .metrics{display:flex;flex-direction:column;gap:0;margin-top:20px}
 .metric{display:flex;justify-content:space-between;align-items:baseline;gap:14px;border-top:1px solid #385463;padding:14px 0}
 .metric .mk{font-size:12px;color:#b1c4c7}.metric .mv{font-family:var(--mono);font-size:20px;color:#f7e6c7;white-space:nowrap}.metric .mu{font-family:var(--sans);font-size:10px;color:#83a5b0;margin-left:6px}
@@ -208,7 +213,7 @@ button,select{touch-action:manipulation}
     <div class="board-label"><span>Panel de Jujuy / 2.º trimestre 2026</span><span>Fuente: ENACOM + INDEC (Censo 2022)</span></div>
     <div class="controls"><span class="lbl">Indicador</span><div class="seg" id="segJ" role="group" aria-label="Elegir indicador"><button type="button" data-m="pen" aria-pressed="true">Penetración</button><button type="button" data-m="fibra" aria-pressed="false">Fibra óptica</button><button type="button" data-m="vel" aria-pressed="false">Velocidad</button></div></div>
     <div class="natrow" id="natrowJ" aria-label="Indicadores provinciales"></div>
-    <div class="main"><div class="card map-card" data-tag="JUJUY · 16 DEPARTAMENTOS"><h3 id="maptitleJ">Penetración por departamento</h3><svg id="mapJ" class="mapviz" role="img" aria-label="Mapa interactivo de los departamentos de Jujuy"></svg><div class="legend"><div class="legbar"></div><div class="legends"><span id="legminJ"></span><span id="legmaxJ"></span></div><div class="legcap" id="legcapJ"></div></div></div>
+    <div class="main"><div class="card map-card" data-tag="JUJUY · 16 DEPARTAMENTOS"><h3 id="maptitleJ">Penetración por departamento</h3><svg id="mapJ" class="mapviz" role="img" aria-label="Mapa interactivo de los departamentos de Jujuy"></svg><div class="legend"><div class="legbar"></div><div class="legends"><span id="legminJ"></span><span id="legmaxJ"></span></div><div class="legcap" id="legcapJ"></div></div><div class="region-legend" id="regionLegendJ" aria-label="Referencia de regiones de Jujuy (color del borde en el mapa y en el ranking)"></div></div>
     <div class="card"><h3 id="ranktitleJ">Ranking de departamentos</h3><div class="rank" id="rankJ"></div></div></div>
     <div class="card province-detail detail-standalone"><h3>El departamento seleccionado</h3><div class="dname" id="dnameJ">Dr. Manuel Belgrano</div><div class="dreg" id="drankJ"></div><div class="metrics" id="metricsJ"></div></div>
   </div>
@@ -567,13 +572,27 @@ function createExplorer(cfg){
   function paintMap(){ const [mn,mx]=domain();
     Object.keys(items).forEach(k=>{ const v=items[k][METRIC];
       if(paths[k]) paths[k].setAttribute('fill', v==null?'#1a2336':scale((v-mn)/(mx-mn||1))); });
+    if(cfg.regionColor){
+      Object.keys(items).forEach(k=>{ if(paths[k] && !paths[k].classList.contains('sel')){
+        paths[k].style.stroke=cfg.regionColor(k); paths[k].style.strokeWidth='1.7'; } });
+    }
     document.getElementById(ids.legmin).textContent=fmt(mn);
     document.getElementById(ids.legmax).textContent=fmt(mx);
     document.getElementById(ids.legcap).textContent=metrics[METRIC].legcap;
     document.getElementById(ids.maptitle).textContent=metrics[METRIC].mapt;
   }
-  function paintSel(){ Object.values(paths).forEach(p=>p.classList.remove('sel'));
-    if(paths[SEL]) paths[SEL].classList.add('sel'); }
+  function paintSel(){ Object.keys(paths).forEach(k=>{ const p=paths[k]; p.classList.remove('sel');
+      if(cfg.regionColor){ p.style.stroke=cfg.regionColor(k); p.style.strokeWidth='1.7'; } });
+    if(paths[SEL]){ paths[SEL].classList.add('sel');
+      if(cfg.regionColor){ paths[SEL].style.stroke=''; paths[SEL].style.strokeWidth=''; } } }
+
+  function renderRegionLegend(){
+    if(!cfg.regionColor || !cfg.regionLegendEl) return;
+    const el=document.getElementById(cfg.regionLegendEl); if(!el) return;
+    const seen={};
+    Object.keys(items).forEach(k=>{ const r=regionOf(k); if(r && !seen[r]) seen[r]=cfg.regionColor(k); });
+    el.innerHTML=Object.keys(seen).map(r=>`<span class="region-chip"><span class="region-chip-dot" style="background:${seen[r]}"></span>${r}</span>`).join('');
+  }
 
   const rankEl=document.getElementById(ids.rank);
   function order(){ return Object.keys(items).filter(k=>items[k][METRIC]!=null).sort((a,b)=>items[b][METRIC]-items[a][METRIC]); }
@@ -582,8 +601,9 @@ function createExplorer(cfg){
     ord.forEach((k,i)=>{ const v=items[k][METRIC];
       const b=document.createElement('button');
       b.className='row'+(k===SEL?' sel':'')+(highlight && k===highlight?' juj':'');
+      const dot=cfg.regionColor?`<span class="rdot" style="background:${cfg.regionColor(k)}"></span>`:'';
       b.innerHTML=`<span class="rpos mono">${i+1}</span>
-        <span class="rname">${k}</span>
+        <span class="rname">${dot}${k}</span>
         <span class="rbarwrap"><span class="rbar" style="width:${Math.max(6,(v-mn)/(mx-mn||1)*100)}%;background:${scale((v-mn)/(mx-mn||1))}"></span>
         <span class="rval">${fmt(v)}</span></span>`;
       b.addEventListener('click',()=>select(k));
@@ -596,7 +616,15 @@ function createExplorer(cfg){
   function renderDetail(){
     document.getElementById(ids.dname).textContent=SEL;
     const total=Object.keys(items).length;
-    document.getElementById(ids.drank).textContent=(regionOf(SEL)||'')+' · puesto '+rankOf(SEL)+' de '+total+' en '+metrics[METRIC].short;
+    const regionLabel=regionOf(SEL)||'';
+    const drankEl=document.getElementById(ids.drank);
+    const rest=' puesto '+rankOf(SEL)+' de '+total+' en '+metrics[METRIC].short;
+    if(cfg.regionColor && regionLabel){
+      const c=cfg.regionColor(SEL);
+      drankEl.innerHTML=`<span class="region-badge" style="background:${c}26;color:${c};border-color:${c}80">${regionLabel}</span><span>· ${rest}</span>`;
+    } else {
+      drankEl.textContent=(regionLabel?regionLabel+' · ':'')+rest;
+    }
     const mEl=document.getElementById(ids.metrics); mEl.innerHTML='';
     [['pen','Penetración','cada 100 hog.'],['fibra','Fibra óptica','% accesos'],['vel','Velocidad media','Mbps']]
     .forEach(([k,lab,u])=>{ const v=items[SEL][k];
@@ -656,7 +684,7 @@ function createExplorer(cfg){
     paintMap(); renderRank(); renderDetail();
   });
 
-  natStats(); paintMap(); paintSel(); renderRank(); renderDetail(); renderSpark();
+  natStats(); paintMap(); paintSel(); renderRank(); renderDetail(); renderSpark(); renderRegionLegend();
 
   return {select, get sel(){return SEL;}, geo:{MW,MH,px,py,featPath}, paths, items};
 }
@@ -678,9 +706,12 @@ const GEOJ=JSON.parse(document.getElementById('geoJujuy').textContent);
 const DEPTOS=DATAJ.departamentos, PROVINCIAL=DATAJ.provincial;
 
 // ---------- explorador de Jujuy por departamento ----------
+const REGION_COLORS={Puna:'#ff6b6b',Quebrada:'#4dd4ac',Valles:'#ffd166',Ramal:'#a78bfa'};
 const explorerJujuy=createExplorer({
   geo:GEOJ, items:DEPTOS, keyProp:'dep', normalize:false,
   regionOf:k=>(DEPTOS[k]&&DEPTOS[k].region)||'',
+  regionColor:k=>REGION_COLORS[DEPTOS[k]&&DEPTOS[k].region]||'#8da5ae',
+  regionLegendEl:'regionLegendJ',
   ids:{seg:'segJ',natrow:'natrowJ',map:'mapJ',maptitle:'maptitleJ',legmin:'legminJ',legmax:'legmaxJ',legcap:'legcapJ',rank:'rankJ',ranktitle:'ranktitleJ',dname:'dnameJ',drank:'drankJ',metrics:'metricsJ'},
   metrics:makeMetrics('departamento'),
   defaultSel:'Dr. Manuel Belgrano',
